@@ -1,0 +1,32 @@
+
+docker run --name some-postgres -env POSTGRES_PASSWORD=mysecretpassword -d postgres
+
+docker container run \
+--name world-db \
+-dp 3307:3306 \
+--env MARIADB_USER=example-user \
+--env MARIADB_PASSWORD=user-password \
+--env MARIADB_ROOT_PASSWORD=root-secret-password \
+--env MARIADB_DATABASE=world-db \
+--volume world-db:/var/lib/mysql \
+--network world-app \
+mariadb:jammy
+
+
+docker container run \
+--name phpmyadmin \
+-d \
+--env PMA_ARBITRARY=1 \
+-p 8070:80 \
+--network world-app \
+phpmyadmin:5.2.0-apache
+
+docker container run --name phpmyadmin -d --env PMA_ARBITRARY=1 -p 8070:80 phpmyadmin:5.2.0-apache
+
+docker container run --name nest-app -w /app -dp 80:3000 -v %cd%:/app node:16-alpine3.16 sh -c "yarn install && start:dev"
+
+docker container run -d --name postgres-db --env POSTGRES_PASSWORD=123456 -v postgres-db:/var/lib/postgresql/data postgres:15.1
+
+docker container run --name pgAdmin --env PGADMIN_DEFAULT_PASSWORD=123456 --env PGADMIN_DEFAULT_EMAIL=superman@google.com -dp 8080:80 dpage/pgadmin4:6.17
+
+docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t jonanv/cron-ticker:latest --push .
