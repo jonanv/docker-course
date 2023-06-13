@@ -1,0 +1,10 @@
+# Folders
+/node_modules
+
+# Files
+Dockerfile
+
+# Files hiden
+.git
+.gitignore
+.dockerignore
