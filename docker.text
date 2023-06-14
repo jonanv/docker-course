@@ -29,4 +29,13 @@ docker container run -d --name postgres-db --env POSTGRES_PASSWORD=123456 -v pos
 
 docker container run --name pgAdmin --env PGADMIN_DEFAULT_PASSWORD=123456 --env PGADMIN_DEFAULT_EMAIL=superman@google.com -dp 8080:80 dpage/pgadmin4:6.17
 
+
+
+DOCKER BUILD
 docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t jonanv/cron-ticker:latest --push .
+
+docker buildx ls
+
+docker buildx use default
+
+docker buildx rm mybuilder
