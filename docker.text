@@ -32,6 +32,12 @@ docker container run --name pgAdmin --env PGADMIN_DEFAULT_PASSWORD=123456 --env 
 
 
 DOCKER BUILD
+docker buildx create --name mybuilder --driver docker-container --bootstrap mybuilder
+
+docker buildx use mybuilder
+
+docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t <username>/<image>:latest --push .
+
 docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t jonanv/cron-ticker:latest --push .
 
 docker buildx ls
@@ -39,3 +45,5 @@ docker buildx ls
 docker buildx use default
 
 docker buildx rm mybuilder
+
+docker buildx imagetools inspect jonanv/cron-ticker:latest
