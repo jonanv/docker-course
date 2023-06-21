@@ -7,7 +7,7 @@ services:
     volumes:
       -.:/app/
     container_name: nest-app
-    port:
+    ports:
       - ${PORT}:${PORT}
     environment:
       APP_VERSION: ${APP_VERSION}
