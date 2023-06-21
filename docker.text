@@ -47,3 +47,7 @@ docker buildx use default
 docker buildx rm mybuilder
 
 docker buildx imagetools inspect jonanv/cron-ticker:latest
+
+
+TARGET STATE
+docker compose down --volumes
