@@ -51,3 +51,13 @@ docker buildx imagetools inspect jonanv/cron-ticker:latest
 
 TARGET STATE
 docker compose down --volumes
+
+docker compose build
+
+docker compose -f docker-compose.prod.yml build
+
+docker tag jonanv/teslo-shop-backend jonanv/teslo-shop:1.0.0 
+
+docker push jonanv/teslo-shop:1.0.0
+
+docker buildx build --platform linux/amd64,linux/arm64 -t jonanv/teslo-shop:1.0.0 --push .
