@@ -61,3 +61,5 @@ docker tag jonanv/teslo-shop-backend jonanv/teslo-shop:1.0.0
 docker push jonanv/teslo-shop:1.0.0
 
 docker buildx build --platform linux/amd64,linux/arm64 -t jonanv/teslo-shop:1.0.0 --push .
+
+docker image prune -a // Eliminar todas las imagenes
