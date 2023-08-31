@@ -74,8 +74,11 @@ docker build --tag jonanv/docker-graphql:0.0.1 . // Construcción de la imagen
 docker container run -d -p 3000:3000 jonanv/docker-graphql:0.0.1
 
 
-
+// NGINX
 docker run --name some-nginx -d -p 8080:80 nginx:1.23.3
 
 docker exec -it e5b bash // Ingresar a la terminar interactiva de un contenedor con bash
 
+docker build --tag heroes-app . --no-cache
+
+docker container run -p 80:80 heroes-app
