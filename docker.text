@@ -65,3 +65,10 @@ docker buildx build --platform linux/amd64,linux/arm64 -t jonanv/teslo-shop:1.0.
 docker image prune -a // Eliminar todas las imagenes
 
 docker compose up -d
+
+
+
+
+docker build --tag jonanv/docker-graphql:0.0.1 . // Construcción de la imagen
+
+docker container run -d -p 3000:3000 jonanv/docker-graphql:0.0.1
