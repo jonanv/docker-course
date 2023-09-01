@@ -38,7 +38,7 @@ kind: Service
 metadata:
   name: pg-admin-service
 spec:
-type: NodePort
+  type: NodePort
   selector:
     app: pg-admin
   ports:
