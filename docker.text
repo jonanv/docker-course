@@ -82,3 +82,11 @@ docker exec -it e5b bash // Ingresar a la terminar interactiva de un contenedor 
 docker build --tag heroes-app . --no-cache
 
 docker container run -p 80:80 heroes-app
+
+// KUBERNETS
+minikube version
+minikube start
+kubectl version
+kubectl version --short
+kubectl get all
+kubectl apply -f postgres-config.yml
