@@ -92,3 +92,4 @@ kubectl get all
 kubectl apply -f postgres-config.yml
 kubectl describe deployment.apps/postgres-deployment
 kubectl logs pod/postgres-deployment-6475d989b5-4kxfw
+minikube service pg-admin-service
