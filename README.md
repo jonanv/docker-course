@@ -98,7 +98,31 @@ docker run -v /var/lib/mysql/data
 
 # Docker network
 ```docker
+# Regla de oro:
+## Si dos o más contenedores están en la misma red, podrán hablar entre sí. Si no lo están, no podrán.
 
+docker network                                  # Ver comandos de network
+docker network create <todo-app>                # Crear una nueva red
+docker network ls                               # Listar todas la redes creadas
+docker network inspect <NAME o ID>              # Inspeccionar una red
+docker network prune                            # Borrar todas las redes no usadas
+
+# Correr una imagen y unirla a la red
+docker run -d \
+--network todo-app --network-alias mysql \
+-v todo-mysql-data:/var/lib/mysql \
+-e MYSQL_ROOT_PASSWORD=secret \
+-e MYSQL_DATABASE=todos \
+mysql:8.0
+
+# -e: Variable de entorno: MySQL necesita definir el root password y el nombre de la base de datos.
+# -v todo-mysql-data:/var/lib/mysql: Volumen con nombre hacia donde MySQL graba la base de datos.
+# --network-alias: Crea un nombre nuestra aplicación solo necesita conectarse a un host llamado mysql y se comunicará con la base de datos.
+
+# Puertos y Paths
+# Cuando vean cosas como: -p 6000:6379
+# Recuerden que es
+# HOST : CONTAINER
 ```
 
 
@@ -132,4 +156,13 @@ docker container run \
 --volume world-db:/var/lib/mysql \
 --network world-app \
 mariadb:jammy
+
+#phpmyadmin
+docker container run \
+--name phpmyadmin \
+-d \
+--env PMA_ARBITRARY=1 \
+-p 8070:80 \
+--network world-app \
+phpmyadmin:5.2.0-apache
 ```
