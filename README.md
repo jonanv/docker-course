@@ -101,11 +101,14 @@ docker run -v /var/lib/mysql/data
 # Regla de oro:
 ## Si dos o más contenedores están en la misma red, podrán hablar entre sí. Si no lo están, no podrán.
 
-docker network                                  # Ver comandos de network
-docker network create <todo-app>                # Crear una nueva red
-docker network ls                               # Listar todas la redes creadas
-docker network inspect <NAME o ID>              # Inspeccionar una red
-docker network prune                            # Borrar todas las redes no usadas
+docker network                                      # Ver comandos de network
+docker network create <todo-app>                    # Crear una nueva red
+docker network ls                                   # Listar todas la redes creadas
+docker network inspect <NAME o ID>                  # Inspeccionar una red
+docker network prune                                # Borrar todas las redes no usadas
+docker network connect --help                       # Opciones de network connect
+docker network connect <todo-app> <container-id>    # Conectar un contenedor con id a una red (todo-app)
+docker network connect todo-app 6lp                 # Conectar un contenedor con id a una red (todo-app)
 
 # Correr una imagen y unirla a la red
 docker run -d \
@@ -157,7 +160,7 @@ docker container run \
 --network world-app \
 mariadb:jammy
 
-#phpmyadmin
+#phpmyadmin con network
 docker container run \
 --name phpmyadmin \
 -d \
