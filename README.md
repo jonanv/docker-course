@@ -276,6 +276,9 @@ docker compose down             # Limpiar todo, los contenedores se detendrán y
 Nomenclatura de los contenedores usados en el docker compose
 ```docker
 <project-name>_<service-name>_<replica-number>
+
+Ejemplo:
+posgres-pgadmin_pgAdmin_1
 ```
 
 ## Best Practices
