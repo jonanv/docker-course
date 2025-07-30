@@ -64,14 +64,16 @@ docker tag <Tag Actual> <USUARIO>/<NUEVO NOMBRE>    # Renombrar una imagen local
 # Docker -it (interactive terminal)
 ```docker
 docker exec -it CONTAINER EXECUTABLE                # Iniciar un comando shell dentro del contenedor (interactive terminal)
-docker exec -it web bash                            # Iniciar un comando shell dentro del contenedor (interactive terminal)
-docker exec -it web /bin/sh                         # Iniciar un comando shell dentro del contenedor (interactive terminal)
+docker exec -it <NAME o ID> bash                    # Iniciar un comando shell dentro del contenedor (interactive terminal)
+docker exec -it <NAME o ID> /bin/sh                 # Iniciar un comando shell dentro del contenedor (interactive terminal)
 ```
 
 # Docker volume
 ```docker
 # Hay 3 tipos de volumenes
+
 ## Named Volumes
+### Este es el volumen más usado.
 docker volume create <volume-name>                # Crear un nuevo volumen
 docker volume ls                                  # Listar los volumenes
 docker volume inspect <volume-name>               # Inspeccionar el volumen específico
@@ -81,8 +83,10 @@ docker run -v todo-db:/etc/todos getting-started  # Usar un volumen al correr un
 
 ## Bind volumes - Vincular volúmenes
 ### Bind volumes trabaja con paths absolutos
-docker run -dp 3000:3000 \
--w /app -v "$(pwd):/app" \
+docker run \
+-dp 3000:3000 \
+-w /app \
+-v "$(pwd):/app" \
 node:18-alpine \
 sh -c "yarn install && yarn run dev"
 
@@ -160,7 +164,7 @@ docker container run \
 --network world-app \
 mariadb:jammy
 
-#phpmyadmin con network
+# phpmyadmin con network
 docker container run \
 --name phpmyadmin \
 -d \
@@ -168,4 +172,13 @@ docker container run \
 -p 8070:80 \
 --network world-app \
 phpmyadmin:5.2.0-apache
+
+# nest-app con bind volume
+docker container run \
+--name nest-app \
+-w /app \
+-dp 80:3000 \
+-v %cd%:/app 
+node:16-alpine3.16 \
+sh -c "yarn install && start:dev"
 ```
