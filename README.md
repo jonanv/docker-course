@@ -24,16 +24,18 @@ docker image --help                         # Ver ayudas de image
 docker image ls                             # Ver todas la imagenes
 docker image rm <container-id>              # Eliminar una imagen por ID
 docker image rm <container-id> -f           # Eliminar una imagen por ID de manera forzada
-docker image rm 606 504                     # Eliminar dos imagenes por ID con los 3 primeros numeros
+docker image rm <container-id> --force      # Eliminar una imagen por ID de manera forzada
+docker image rm 606 5f7                     # Eliminar dos imagenes por ID con los 3 primeros numeros
 docker image prune                          # Elimina TODAS las imagenes
 
-docker container run -d                     # Correr contenedor del modo desenlazado (detach)
-docker container run --detach               # Correr contenedor del modo desenlazado (detach)
-docker container run -p 8080:80             # Correr contenedor publicado en el puerto 8080 de mi equipo y lo expone en el 80 del contenedor (equipo:contenedor)
-docker container run --publish 8080:80      # Correr contenedor publicado en el puerto 8080 de mi equipo y lo expone en el 80 del contenedor (equipo:contenedor)
-docker container stop <cotainer-id>         # Detener contenedor por ID
-docker container stop <cotainer-name>       # Detener contenedor por nombre
-docker container start <cotainer-id>        # Iniciar contenedor por ID
-docker container start <cotainer-name>      # Iniciar contenedor por nombre
+docker container run -d                         # Correr contenedor del modo desenlazado (detach)
+docker container run --detach                   # Correr contenedor del modo desenlazado (detach)
+docker container run -p 8080:80                 # Correr contenedor publicado en el puerto 8080 de mi equipo y lo expone en el 80 del contenedor (equipo:contenedor)
+docker container run --publish 8080:80          # Correr contenedor publicado en el puerto 8080 de mi equipo y lo expone en el 80 del contenedor (equipo:contenedor)
+docker container stop <cotainer-id>             # Detener contenedor por ID
+docker container stop <cotainer-name>           # Detener contenedor por nombre
+docker container start <cotainer-id>            # Iniciar contenedor por ID
+docker container start <cotainer-name>          # Iniciar contenedor por nombre
+docker container run --name <container-name>    # Asignar nombre al contenedor
 
 ```
