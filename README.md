@@ -70,6 +70,18 @@ docker exec -it web /bin/sh                         # Iniciar un comando shell d
 
 # Docker volume
 ```docker
+# Hay 3 tipos de volumenes
+## Named Volumes
+docker volume create <volume-name>                # Crear un nuevo volumen
+docker volume ls                                  # Listar los volumenes
+docker volume inspect <volume-name>               # Inspeccionar el volumen específico
+docker volume prune                               # Remueve todos los volúmenes no usados
+docker volume rm <volume-name>                    # Remueve uno o más volúmenes especificados
+docker run -v todo-db:/etc/todos getting-started  # Usar un volumen al correr un contenedor
+
+## Bind volumes - Vincular volúmenes
+
+## Anonymous Volumes
 
 ```
 
@@ -98,7 +110,7 @@ docker container run \
 --env MARIADB_DATABASE=world-db \
 mariadb:jammy
 
-# maridb con volumen y network 
+# maridb con volume y network 
 docker container run \
 --name world-db \
 -dp 3307:3306 \
