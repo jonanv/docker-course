@@ -181,4 +181,34 @@ docker container run \
 -v %cd%:/app 
 node:16-alpine3.16 \
 sh -c "yarn install && start:dev"
+
+# Laboratorio postgres y pgadmin
+docker container run \
+-d \
+--name postgres-db \
+--env POSTGRES_PASSWORD=123456 \
+-v postgres-db:/var/lib/postgresql/data \
+postgres:15.1
+
+docker container run \
+--name pgAdmin \
+--env PGADMIN_DEFAULT_PASSWORD=123456 \
+--env PGADMIN_DEFAULT_EMAIL=superman@google.com \
+-dp 8080:80 
+dpage/pgadmin4:6.17
+```
+
+# Docker compose docker-compose.yml
+```docker
+
+```
+
+# Docker build
+```docker
+
+```
+
+# KUBERNETS
+```docker
+
 ```
