@@ -199,8 +199,92 @@ dpage/pgadmin4:6.17
 ```
 
 # Docker compose docker-compose.yml
-```docker
+Docker Compose es una herramienta que se desarrolló para ayudar a definir y compartir aplicaciones de varios contenedores. Ejemplo: de docker-compose.yml
 
+```docker
+# Versión a usar en el docker-compose
+version: '3'
+
+services:
+    # Nombre del servicio
+    anylistapp:
+        # Depende de otro servicio
+        depends_on:
+            - db
+
+        # Construcción de imagen
+        build:
+            # Path del dockerfile (./path/)
+            context: .
+            dockerfile: Dockerfile
+        
+        # Nombre del a imagen a usar
+        image: node:18-alpine
+
+        # Ejecutar un comando shell dentro
+        command: sh -c "yarn install && yarn run dev"
+
+        # Directorio a de trabajo dentro del contenedor
+        working_dir: /app
+
+        # Nombre del contenedor
+        container_name: AnylistApp
+
+        # Reiniciar el contenedor si se detiene
+        restart: always
+
+        # Puertos: MI_EQUIPO : CONTENEDOR
+        ports:
+            - 8080:3000
+```
+
+docker-compose.yml del laboratorio postgres y pgadmin
+```docker
+version: '3'
+
+services:
+  db:
+    container_name: postgres_database
+    image: postgres:15.1
+    volumes:
+      - postgres-db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=123456
+
+  pgAdmin:
+    depends_on:
+      - db
+    image: dpage/pgadmin4:6.17
+    ports:
+      - "8080:80"
+    environment:
+      - PGADMIN_DEFAULT_PASSWORD=123456 
+      - PGADMIN_DEFAULT_EMAIL=superman@google.com 
+
+volumes:
+  postgres-db:
+    external: true
+```
+
+## Docker composer commands
+```docker
+docker compose up -d            # Levantar y ejecutar el comando
+docker compose logs -f          # Revisar logs de los contenedores levantados con el compose
+docker compose down             # Limpiar todo, los contenedores se detendrán y la red se removerá
+```
+## Nomenclatura docker compose
+Nomenclatura de los contenedores usados en el docker compose
+```docker
+<project-name>_<service-name>_<replica-number>
+```
+
+## Best Practices
+Escaneo de imagen
+Después de construir una imagen, es buena práctica
+realizar un scan en ella para buscar vulnerabilidades.
+```docker
+docker scan getting-started
+docker scan getting-started:1.0.0
 ```
 
 # Docker build
