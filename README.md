@@ -27,6 +27,7 @@ docker image rm <container-id> -f           # Eliminar una imagen por ID de mane
 docker image rm <container-id> --force      # Eliminar una imagen por ID de manera forzada
 docker image rm 606 5f7                     # Eliminar dos imagenes por ID con los 3 primeros numeros
 docker image prune                          # Elimina TODAS las imagenes
+docker image prune -a                       # Elimina TODAS las imagenes no usadas
 
 docker container run -d                         # Correr contenedor del modo desenlazado (detach)
 docker container run --detach                   # Correr contenedor del modo desenlazado (detach)
@@ -38,13 +39,13 @@ docker container start <cotainer-id>            # Iniciar contenedor por ID
 docker container start <cotainer-name>          # Iniciar contenedor por nombre
 docker container run --name <container-name>    # Asignar nombre al contenedor
 
-docker container run --name some-postgres -dp 5432:5432 -e POSTGRES_PASSWORD=mysecretpassword postgres # Asginar variables de entorno (env list)
+docker container run --name some-postgres -dp 5432:5432 -e POSTGRES_PASSWORD=mysecretpassword postgres # Asginar variables de entorno (env)
 
 docker container run \
 --name some-postgres \
 -dp 5432:5432 \
 -e POSTGRES_PASSWORD=mysecretpassword \
-postgres:14-alpine3.17                          # Asginar variables de entorno (env list)
+postgres:14-alpine3.17                          # Asginar variables de entorno (env)
 
 docker container logs <contaner-id>             # Muestra los logs de un contenedor
 docker container logs --follow <contaner-id>    # Muestra los logs de un contenedor y seguir nuevos logs
@@ -54,7 +55,18 @@ docker stats                                    # Muestra estadisticas del consu
 docker image tag SOURCE[:TAG] TARGET_IMAGE[:TAG]    # Renombrar una imagen local
 docker tag IMAGE NEW_IMAGE                          # Renombrar una imagen local
 docker tag <Tag Actual> <USUARIO>/<NUEVO NOMBRE>    # Renombrar una imagen local
+```
 
+# Docker -it (interactive terminal)
+```
+docker exec -it CONTAINER EXECUTABLE                # Iniciar un comando shell dentro del contenedor (interactive terminal)
+docker exec -it web bash                            # Iniciar un comando shell dentro del contenedor (interactive terminal)
+docker exec -it web /bin/sh                         # Iniciar un comando shell dentro del contenedor (interactive terminal)
+```
+
+
+# Examples Docker container
+```
 docker container run \
 --name world-db \
 -dp 3307:3306 \
@@ -65,7 +77,4 @@ docker container run \
 --volume world-db:/var/lib/mysql \
 --network world-app \
 mariadb:jammy
-
-
-
 ```
