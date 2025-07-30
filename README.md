@@ -29,6 +29,10 @@ docker image rm 606 5f7                     # Eliminar dos imagenes por ID con l
 docker image prune                          # Elimina TODAS las imagenes
 docker image prune -a                       # Elimina TODAS las imagenes no usadas
 
+docker build -t getting-started .           # Construir y asignar un tag a la imagen 
+                                            #   -t : Asigna el tag name 
+                                            #   . : Indica a dónde buscar el archivo DockerFile
+
 docker container run -d                         # Correr contenedor del modo desenlazado (detach)
 docker container run --detach                   # Correr contenedor del modo desenlazado (detach)
 docker container run -p 8080:80                 # Correr contenedor publicado en el puerto 8080 de mi equipo y lo expone en el 80 del contenedor (equipo:contenedor)
@@ -58,15 +62,43 @@ docker tag <Tag Actual> <USUARIO>/<NUEVO NOMBRE>    # Renombrar una imagen local
 ```
 
 # Docker -it (interactive terminal)
-```
+```docker
 docker exec -it CONTAINER EXECUTABLE                # Iniciar un comando shell dentro del contenedor (interactive terminal)
 docker exec -it web bash                            # Iniciar un comando shell dentro del contenedor (interactive terminal)
 docker exec -it web /bin/sh                         # Iniciar un comando shell dentro del contenedor (interactive terminal)
 ```
 
+# Docker volume
+```docker
+
+```
+
+# Docker network
+```docker
+
+```
+
 
 # Examples Docker container
-```
+```docker
+# postgres
+docker container run \
+--name some-postgres \
+-dp 5432:5432 \
+-e POSTGRES_PASSWORD=mysecretpassword \
+postgres:14-alpine3.17
+
+# maridb
+docker container run \
+--name world-db \
+-dp 3307:3306 \
+--env MARIADB_USER=example-user \
+--env MARIADB_PASSWORD=user-password \
+--env MARIADB_ROOT_PASSWORD=root-secret-password \
+--env MARIADB_DATABASE=world-db \
+mariadb:jammy
+
+# maridb con volumen y network 
 docker container run \
 --name world-db \
 -dp 3307:3306 \
