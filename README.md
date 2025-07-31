@@ -398,14 +398,21 @@ docker buildx rm mybuilder                                      # Eliminar el bu
 docker buildx imagetools inspect jonanv/cron-ticker:latest      # Se utiliza para examinar detalles de imágenes Docker, incluyendo imágenes de plataforma única y multiplataforma. Permite visualizar el manifiesto JSON de una imagen, así como su configuración y capas
 ```
 
-# NGINX
+# TARGET STATE
 ```docker
-docker run --name some-nginx -d -p 8080:80 nginx:1.23.3
+docker compose down --volumes                                   # Elimina todos los volumnes
+docker compose build                                            # Construye el contendor con docker compose y dockerfile
+docker compose -f docker-compose.prod.yml build                 # Construye el docker compose de produccion
+docker tag jonanv/teslo-shop-backend jonanv/teslo-shop:1.0.0    # 
+docker push jonanv/teslo-shop:1.0.0                             # 
 
-docker exec -it e5b bash                                        # Ingresar a la terminar interactiva de un contenedor con bash
+docker buildx build \
+--platform linux/amd64,linux/arm64 \
+-t jonanv/teslo-shop:1.0.0 --push .                             # 
 
-docker build --tag heroes-app . --no-cache
+docker image prune -a                                           # Eliminar todas las imagenes
+docker compose up -d                                            # Ejecuta el multicontainer con detach
+```
 
-docker container run -p 80:80 heroes-app
 ```
 ```
