@@ -395,7 +395,7 @@ docker buildx build \
 
 docker buildx use default                                       # Seleccionar el builder por default
 docker buildx rm mybuilder                                      # Eliminar el builder creado
-docker buildx imagetools inspect jonanv/cron-ticker:latest      # 
+docker buildx imagetools inspect jonanv/cron-ticker:latest      # Se utiliza para examinar detalles de imágenes Docker, incluyendo imágenes de plataforma única y multiplataforma. Permite visualizar el manifiesto JSON de una imagen, así como su configuración y capas
 ```
 
 # NGINX
