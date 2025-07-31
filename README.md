@@ -30,7 +30,7 @@ docker image prune                          # Elimina TODAS las imagenes
 docker image prune -a                       # Elimina TODAS las imagenes no usadas
 
 docker build -t getting-started .           # Construir y asignar un tag a la imagen 
-                                            #   -t : Asigna el tag name 
+                                            #   -t : Asigna el tag name O --tag
                                             #   . : Indica a dónde buscar el archivo DockerFile
 
 docker container run -d                         # Correr contenedor del modo desenlazado (detach)
@@ -290,9 +290,85 @@ docker scan getting-started
 docker scan getting-started:1.0.0
 ```
 
+# Dockerfile
+### Un archivo de texto con instrucciones necesarias para crear una imagen. Se puede ver como un blueprint o plano para su construcción.
+
+`Comandos comunes en este tipo de archivo. El orden de cada comando es importante, especialmente si se quiere manejar correctamente el caché de capas. (Lo que menos cambia arriba y lo que mas cambia abajo)`
+
+Herencia: Este paso basa nuestra imagen a crear, a partir de otra en particular.
+```docker
+FROM node:18.3.1
+```
+
+Asignar alias (Multi-State): Se asigna un alias a esta etapa llamada “builder”, la cual permite realizar un multi-stage build
+```docker
+FROM node:18.3.1 AS builder
+```
+
+Especificar la plataforma: Útil para M1/M2 Macs
+```docker
+FROM --platform=linux/amd64 node:18-alpine
+```
+
+Variables y uso: se crea una variable llamada APP_HOME con el valor de “/app”
+```docker
+ENV APP_HOME /app
+RUN mkdir $APP_HOME
+```
+
+Inicialización: Se indica que se deben de descargar e instalar los módulos de node.
+```docker
+RUN npm install
+RUN yarn install --frozen-lockfile
+```
+
+Working directory: Establece que partir de este punto, estamos en el directorio especificado, es como cambiarse de directorio via comando.
+```docker
+WORKDIR /app
+```
+
+Punto de montaje: Este punto de montaje se asignará a una ubicación en el host que se especifica cuando se crea el contenedor o, si no se especifica, se elige automáticamente desde un directorio creado en /var/lib/docker/volumes.
+```docker
+VOLUME ["/data"]
+```
+
+Copiar archivos a una imagen: Copia el archivo local file.xyz de mi equipo al working directory especificado seguido de /file.xyz
+```docker
+ADD file.xyz /file.xyz
+```
+
+También se puede: Copia los archivos package.json y yarn.lock al root del contenedor
+```docker
+COPY package.json yarn.lock ./
+Ó
+COPY ["package.json", "yarn.lock", "./"]
+```
+
+Copia todos los archivos y directorios: de mi proyecto hacia el working directory del contenedor, excluyendo lo especificado en el archivo .dockerignore
+```docker
+COPY . .
+```
+
+Expose: informa a Docker que el contenedor escucha en los puertos de red especificados en tiempo de ejecución
+```docker
+EXPOSE 3000
+```
+
+Comando: especifica la instrucción que se ejecutará cuando se inicie un contenedor Docker.
+```docker
+CMD ["node", "dist/main"]
+```
+
+Es buena practica reconstruir de vez en cuando toda la imagen.
+```docker
+docker build --no-cache -t myImage:myTag
+```
+
+`BuildX: Información relacionada a la creación de multiples arquitecturas con un solo comando.`
+
 # Docker build
 ```docker
-
+docker build --tag cron-ticket .            # Crear la imagen
 ```
 
 # KUBERNETS
