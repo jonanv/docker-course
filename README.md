@@ -366,7 +366,8 @@ Es buena practica reconstruir de vez en cuando toda la imagen.
 docker build --no-cache -t myImage:myTag
 ```
 
-`BuildX: Información relacionada a la creación de multiples arquitecturas con un solo comando.`
+[BuildX](https://docs.docker.com/build/building/multi-platform/#getting-started): 
+`Información relacionada a la creación de multiples arquitecturas con un solo comando.`
 
 # Docker build
 ```docker
@@ -377,11 +378,21 @@ docker build -t cron-ticket:tigre .         # Crear la imagen con el tag tigre
 # Buildx
 ```docker
 docker buildx ls                                                # Listar los build que tenemos disponibles
-docker buildx create --name mybuilder --driver docker-container --bootstrap        # Crear un nuevo builder
+
+docker buildx create \
+--name mybuilder --driver docker-container --bootstrap          # Crear un nuevo builder
+
 docker buildx use mybuilder                                     # Seleccionar el builder creado
 docker buildx inspect                                           # Inspeccionar el builder
-docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t <username>/<image>:latest --push .  # Publicar la imagen con las plataformas indicadas
-docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t jonanv/cron-ticker:latest --push .  # Publicar la imagen con las plataformas indicadas
+
+docker buildx build \
+--platform linux/amd64,linux/arm64,linux/arm/v7 \
+-t <username>/<image>:latest --push .                           # Publicar la imagen con las plataformas indicadas
+
+docker buildx build \
+--platform linux/amd64,linux/arm64,linux/arm/v7 \
+-t jonanv/cron-ticker:latest --push .                           # Publicar la imagen con las plataformas indicadas
+
 docker buildx use default                                       # Seleccionar el builder por default
 docker buildx rm mybuilder                                      # Eliminar el builder creado
 docker buildx imagetools inspect jonanv/cron-ticker:latest      # 
@@ -391,7 +402,7 @@ docker buildx imagetools inspect jonanv/cron-ticker:latest      #
 ```docker
 docker run --name some-nginx -d -p 8080:80 nginx:1.23.3
 
-docker exec -it e5b bash                                    # Ingresar a la terminar interactiva de un contenedor con bash
+docker exec -it e5b bash                                        # Ingresar a la terminar interactiva de un contenedor con bash
 
 docker build --tag heroes-app . --no-cache
 
