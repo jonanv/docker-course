@@ -56,9 +56,11 @@ docker container logs --follow <contaner-id>    # Muestra los logs de un contene
 
 docker stats                                    # Muestra estadisticas del consumo de memoria
 
-docker image tag SOURCE[:TAG] TARGET_IMAGE[:TAG]    # Renombrar una imagen local
-docker tag IMAGE NEW_IMAGE                          # Renombrar una imagen local
-docker tag <Tag Actual> <USUARIO>/<NUEVO NOMBRE>    # Renombrar una imagen local
+docker image tag SOURCE[:TAG] TARGET_IMAGE[:TAG]                  # Renombrar una imagen local
+docker image tag cron-ticker:1.0.0 cron-ticker:bufalo             # Renombrar una imagen local con etiqueta 1.0.0 a bufalo
+docker tag IMAGE NEW_IMAGE                                        # Renombrar una imagen local
+docker tag <Tag Actual> <USUARIO>/<NUEVO NOMBRE>                  # Renombrar una imagen local
+docker image tag cron-ticker:1.0.0 jonanv/cron-ticker:bufalo      # Renombrar una imagen local con etiqueta 1.0.0 a bufalo
 ```
 
 # Docker -it (interactive terminal)
