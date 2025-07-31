@@ -371,9 +371,30 @@ docker build --no-cache -t myImage:myTag
 # Docker build
 ```docker
 docker build --tag cron-ticket .            # Crear la imagen
+docker build -t cron-ticket:tigre .         # Crear la imagen con el tag tigre
 ```
 
-# KUBERNETS
+# Buildx
 ```docker
+docker buildx ls                                                # Listar los build que tenemos disponibles
+docker buildx create --name mybuilder --driver docker-container --bootstrap        # Crear un nuevo builder
+docker buildx use mybuilder                                     # Seleccionar el builder creado
+docker buildx inspect                                           # Inspeccionar el builder
+docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t <username>/<image>:latest --push .  # Publicar la imagen con las plataformas indicadas
+docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t jonanv/cron-ticker:latest --push .  # Publicar la imagen con las plataformas indicadas
+docker buildx use default                                       # Seleccionar el builder por default
+docker buildx rm mybuilder                                      # Eliminar el builder creado
+docker buildx imagetools inspect jonanv/cron-ticker:latest      # 
+```
 
+# NGINX
+```docker
+docker run --name some-nginx -d -p 8080:80 nginx:1.23.3
+
+docker exec -it e5b bash                                    # Ingresar a la terminar interactiva de un contenedor con bash
+
+docker build --tag heroes-app . --no-cache
+
+docker container run -p 80:80 heroes-app
+```
 ```
