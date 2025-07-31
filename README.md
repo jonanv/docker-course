@@ -68,6 +68,7 @@ docker image tag cron-ticker:1.0.0 jonanv/cron-ticker:bufalo      # Renombrar un
 docker exec -it CONTAINER EXECUTABLE                # Iniciar un comando shell dentro del contenedor (interactive terminal)
 docker exec -it <NAME o ID> bash                    # Iniciar un comando shell dentro del contenedor (interactive terminal)
 docker exec -it <NAME o ID> /bin/sh                 # Iniciar un comando shell dentro del contenedor (interactive terminal)
+exit                                                # Salir de la terminal interactiva
 ```
 
 # Docker volume
@@ -414,5 +415,12 @@ docker image prune -a                                           # Eliminar todas
 docker compose up -d                                            # Ejecuta el multicontainer con detach
 ```
 
+# NGINX
+```docker
+docker run --name some-nginx -d -p 8080:80 nginx:1.23.3         # Ejecutar un contenedor de nginx
+docker exec -it e5b bash                                        # Ingresar a la terminar interactiva de un contenedor en la carpeta bash de nginx
+exit                                                            # Salir de la terminal interactiva
+docker build --tag heroes-app . --no-cache                      # Construir una imagen sin cache
+docker container run -p 80:80 heroes-app                        # Ejecutar contenedor de la app heroes-app
 ```
 ```
