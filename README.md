@@ -423,4 +423,59 @@ exit                                                            # Salir de la te
 docker build --tag heroes-app . --no-cache                      # Construir una imagen sin cache
 docker container run -p 80:80 heroes-app                        # Ejecutar contenedor de la app heroes-app
 ```
+
+# KUBERNETS
+### Pod
+Los pods son objetos implemtables más pequeños y básicos en K8s.
+Tiene una IP única asignada, que al reconstruirse cambia.
+
+### Service
+- Tiene una IP única asignada
+- IP permanente
+- Cilco de vida del POD y servicio son independientes
+- Hay dos tipos de servicios
+  1. Internal Service
+  2. External
+
+### Ingress
+Una nueva solicitud a nuestro sitio web (por ejemplo) entra primero por ingress y este a los respectivos servicios
+
+### ConfigMap
+Podemos verlo como variables de entorno.
+Ej: URL de la base de datos
+
+### Secret
+Podemos verlo coo las variables de entono pero seguras. K8s no encripta.
+Ej: Credenciales, llaves sercretas
+
+### Volume
+Almancenamiento en una máquina local, o lugar remoto fuera del cluster de K8s. K8s no maneja persistencia de la data.
+
+### Deployment
+Es un plano o "Blueprint" para crear todo POD y la cantidad de replicas. 
+Aquí es donde puede escalar arriba o abajo las replicas.
+
+### StatefulSet
+Este es un plano similar a los deployments, pero para bases de datos principalmente.
+
+
+![k8s-diagram](assets/imgs/k8s-diagram.png)
+![kubernets](assets/imgs/kubernets.png)
+
+
+```docker
+minikube version                                                          # Ver la version de minikube
+minikube start                                                            # Iniciar minikube
+minikube delete --all                                                     # Elimina todo del cluster minikube
+
+kubectl version                                                           # Ver la version de kubectl
+kubectl version --short                                                   # Ver la version de kubectl corta
+kubectl get all                                                           # 
+kubectl apply -f postgres-config.yml                                      # 
+kubectl describe deployment.apps/postgres-deployment                      # 
+kubectl logs pod/postgres-deployment-6475d989b5-4kxfw                     # 
+
+minikube service pg-admin-service                                         # Desplegar servicio
+kubectl rollout restart deployment deployment.apps/backend-deployment     # Reiniciar deployment en especifico
+minikube delete --all                                                     # Elimina el cluster
 ```
