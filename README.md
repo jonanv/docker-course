@@ -470,10 +470,11 @@ minikube delete --all                                                     # Elim
 
 kubectl version                                                           # Ver la version de kubectl
 kubectl version --short                                                   # Ver la version de kubectl corta
-kubectl get all                                                           # 
-kubectl apply -f postgres-config.yml                                      # 
-kubectl describe deployment.apps/postgres-deployment                      # 
-kubectl logs pod/postgres-deployment-6475d989b5-4kxfw                     # 
+kubectl get all                                                           # Obtener la informacion del cluster
+
+kubectl apply -f postgres-config.yml                                      # Crear dentro del cluster
+kubectl describe deployment.apps/postgres-deployment                      # Obtener información sobre el pod
+kubectl logs pod/postgres-deployment-6475d989b5-4kxfw                     # Ver los logs del pod corriendo
 
 minikube service pg-admin-service                                         # Desplegar servicio
 kubectl rollout restart deployment deployment.apps/backend-deployment     # Reiniciar deployment en especifico
