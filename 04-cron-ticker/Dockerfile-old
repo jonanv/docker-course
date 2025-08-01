@@ -21,7 +21,7 @@ COPY [".", "./"]
 # Realizar testing
 RUN npm run test
 
-# Eliminar archivos y directorios no necesarios en PRODUCCION
+# Eliminar archivos y directorios no necesarios en PRODUCCION (rm: remove, rf: recursive force)
 # RUN rm -rf tests
 # RUN rm -rf node_modules
 RUN rm -rf tests && rm -rf node_modules

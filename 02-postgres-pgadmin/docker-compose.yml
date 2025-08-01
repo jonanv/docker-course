@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 
 services:
   db:
@@ -6,7 +6,7 @@ services:
     image: postgres:15.1
     volumes:
       # - postgres-db:/var/lib/postgresql/data # ejemplo
-      - ./postgres:/var/lib/postgresql/data
+      - ./postgres:/var/lib/postgresql/data # bind volume
     environment:
       - POSTGRES_PASSWORD=123456
 
@@ -17,7 +17,7 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - ./pgadmin:/var/lib/pgadmin
+      - ./pgadmin:/var/lib/pgadmin # bind volume
     environment:
       - PGADMIN_DEFAULT_PASSWORD=123456
       - PGADMIN_DEFAULT_EMAIL=superman@google.com
