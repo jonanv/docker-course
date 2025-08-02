@@ -2,21 +2,21 @@ version: '3'
 
 
 services:
-  app:
-    build:
-      context: .
-      target: ${STAGE}
-      dockerfile: Dockerfile
+  app:                        # Nombre del servicio    
+    build:                    # Construir la imagen del contenedor       
+      context: .              # Contexto, donde se encuentra el Dockerfile
+      target: ${STAGE}        # Etapa de construccion, puede ser dev o prod 
+      dockerfile: Dockerfile  # Nombre del Dockerfile
 
-    # command: yarn start:dev
+    # command: yarn start:dev   # Comando a ejecutar al iniciar el contenedor, por defecto es yarn start:dev
     volumes:
-      - .:/app/
-      - /app/node_modules    # Volumen anonimo para node_modules
+      - .:/app/               # Bind volume: Montar el directorio actual en /app dentro del contenedor 
+      - /app/node_modules     # Volumen anonimo para node_modules, mapeo adicional para evitar conflictos con el host
 
-    container_name: nest-app
+    container_name: nest-app  # Nombre del contenedor
     ports:
-      - ${PORT}:${PORT}
-    environment:
+      - ${PORT}:${PORT}       # Mapeo de puertos, el puerto del host al puerto del contenedor 
+    environment:              # Variables de entorno
       APP_VERSION: ${APP_VERSION}
       STAGE: ${STAGE}
       DB_PASSWORD: ${DB_PASSWORD}
@@ -30,7 +30,7 @@ services:
   
   db:
     image: postgres:14.3
-    restart: always
+    restart: always           # Reiniciar siempre el contenedor si se detiene
     ports:
       - "5432:5432"
     environment:
@@ -38,9 +38,9 @@ services:
       POSTGRES_DB: ${DB_NAME}
     container_name: ${DB_NAME}
     volumes:
-      - postgres-db:/var/lib/postgresql/data
+      - postgres-db:/var/lib/postgresql/data  # Volumen para persistencia de datos
 
 
-volumes:
-  postgres-db:
+volumes:                      # Volumenes para persistencia de datos
+  postgres-db:                # Nombre del volumen
     external: false

@@ -274,6 +274,10 @@ volumes:
 docker compose up -d            # Levantar y ejecutar el comando
 docker compose logs -f          # Revisar logs de los contenedores levantados con el compose
 docker compose down             # Limpiar todo, los contenedores se detendrán y la red se removerá
+docker compose start            # Iniciar servicios
+docker compose stop             # Detener servicios
+docker compose restart          # Reiniciar servicios
+docker compose build            # Construye el contendor con docker compose y dockerfile
 ```
 ## Nomenclatura docker compose
 Nomenclatura de los contenedores usados en el docker compose
