@@ -22,10 +22,12 @@ docker images --all                         # Ver todas la imagenes
 docker images --help                        # Ver ayudas de images
 docker image --help                         # Ver ayudas de image
 docker image ls                             # Ver todas la imagenes
-docker image rm <container-id>              # Eliminar una imagen por ID
-docker image rm <container-id> -f           # Eliminar una imagen por ID de manera forzada
-docker image rm <container-id> --force      # Eliminar una imagen por ID de manera forzada
-docker image rm 606 5f7                     # Eliminar dos imagenes por ID con los 3 primeros numeros
+docker image rm <image-id>                  # Eliminar una imagen por ID
+docker image rm <image-id> -f               # Eliminar una imagen por ID de manera forzada
+docker image rm <image-id> --force          # Eliminar una imagen por ID de manera forzada
+docker image rm 606 5f7                     # Eliminar dos imagenes por ID con los 3 primeros numeros (ID completo)
+docker image rm <image-id> o <ID1 ID2 ID3…> # Eliminar dos imagenes por ID con los 3 primeros numeros (ID completo)
+docker rmi IMAGE                            # Eliminar una imagen por ID
 docker image prune                          # Elimina TODAS las imagenes
 docker image prune -a                       # Elimina TODAS las imagenes no usadas
 
@@ -274,6 +276,11 @@ volumes:
 docker compose up -d            # Levantar y ejecutar el comando
 docker compose logs -f          # Revisar logs de los contenedores levantados con el compose
 docker compose down             # Limpiar todo, los contenedores se detendrán y la red se removerá
+docker compose start            # Iniciar servicios
+docker compose stop             # Detener servicios
+docker compose restart          # Reiniciar servicios
+docker compose build            # Construye el contendor con docker compose y dockerfile
+docker compose up -d --build    # Reconstruye y levanta los contenedores en segundo plano, usando la última configuración
 ```
 ## Nomenclatura docker compose
 Nomenclatura de los contenedores usados en el docker compose
