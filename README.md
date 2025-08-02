@@ -25,7 +25,9 @@ docker image ls                             # Ver todas la imagenes
 docker image rm <image-id>                  # Eliminar una imagen por ID
 docker image rm <image-id> -f               # Eliminar una imagen por ID de manera forzada
 docker image rm <image-id> --force          # Eliminar una imagen por ID de manera forzada
-docker image rm 606 5f7                     # Eliminar dos imagenes por ID con los 3 primeros numeros
+docker image rm 606 5f7                     # Eliminar dos imagenes por ID con los 3 primeros numeros (ID completo)
+docker image rm <image-id> o <ID1 ID2 ID3…> # Eliminar dos imagenes por ID con los 3 primeros numeros (ID completo)
+docker rmi IMAGE                            # Eliminar una imagen por ID
 docker image prune                          # Elimina TODAS las imagenes
 docker image prune -a                       # Elimina TODAS las imagenes no usadas
 
