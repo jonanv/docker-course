@@ -280,6 +280,7 @@ docker compose start            # Iniciar servicios
 docker compose stop             # Detener servicios
 docker compose restart          # Reiniciar servicios
 docker compose build            # Construye el contendor con docker compose y dockerfile
+docker compose up -d --build    # Reconstruye y levanta los contenedores en segundo plano, usando la última configuración
 ```
 ## Nomenclatura docker compose
 Nomenclatura de los contenedores usados en el docker compose
