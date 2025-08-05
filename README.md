@@ -282,6 +282,10 @@ docker compose restart          # Reiniciar servicios
 docker compose build            # Construye el contendor con docker compose y dockerfile
 docker compose up -d --build    # Reconstruye y levanta los contenedores en segundo plano, usando la última configuración
 docker compose down -v --remove-orphans  # detiene y elimina todos los contenedores, redes y volúmenes creados por tu docker-compose.yml y limpia cualquier contenedor "huérfano" que no pertenezca a la configuración actual.
+
+docker logs keycloak --tail 50        # Logs ultimas 50 lineas
+docker logs oauth2-proxy --tail 50    # Logs ultimas 50 lineas
+
 ```
 ## Nomenclatura docker compose
 Nomenclatura de los contenedores usados en el docker compose
